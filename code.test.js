@@ -1,7 +1,7 @@
 // test.
 const fs = require('fs');
-eval(fs.readFileSync('code.js')+'');
 
+eval(fs.readFileSync('code.js')+'');
 
 // Test cases
 const testCases = [
@@ -71,7 +71,17 @@ const testCases = [
 ];
 
 // Run test cases
-testCases.forEach(({ graph1, graph2, expected }, index) => {
+//modofied in order to have a stop if a test is failed
+for(let index = 0; index < testCases.length; index++){
+    const { graph1, graph2, expected } = testCases[index];
     const result = are_isomorphic(graph1, graph2);
-    console.log(`Test Case ${index + 1}:`, result === expected ? "Passed" : "Failed");
-});
+
+    if (result !== expected) {
+        console.log(`Test Case ${index + 1}: Failed`);
+        console.log("tests failed");
+        break;
+    } else {
+        console.log(`test case ${index + 1}: passed`);
+    }
+}
+
