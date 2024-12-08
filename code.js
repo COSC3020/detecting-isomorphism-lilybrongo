@@ -15,7 +15,8 @@ function are_isomorphic(graph1, graph2) {
         console.log('Graphs do not have the same number of edges');
         return false;
     }
-//we looked at map/reduce functions this week and I wanted to try to implement this in my code
+//using reduce to add up all the numbers within the row
+//in oder to calculate the nuber of edges in a graph respresented by the adjacency matrix    
     function checknumberofEdges(graph) {
         let numberofEdges = 0;
         for (let i = 0; i < graph.length; i++) {
