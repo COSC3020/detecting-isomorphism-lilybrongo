@@ -8,14 +8,12 @@ function are_isomorphic(graph1, graph2) {
     //cases permit isomorphism
     if (graph1.length !== graph2.length) {
         console.log('Graphs do not have the same number of vertices');
-        return checkIsomorphicMapping(graph1, graph2);
-        //return false;
+        return false;
     }
 
     if (checknumberofEdges(graph1) !== checknumberofEdges(graph2)) {
         console.log('Graphs do not have the same number of edges');
-        return checkIsomorphicMapping(graph1, graph2);
-        //return false;
+        return false;
     }
 //using reduce to add up all the numbers within the row
 //in oder to calculate the nuber of edges in a graph respresented by the adjacency matrix    
@@ -67,7 +65,7 @@ function are_isomorphic(graph1, graph2) {
             numbers.push(i);
         }
         const permutations = generatePermutations(numbers); // Generate all possible vertex mappings
-        
+
 //This was my error, in this for loop I had it so that if one mapping was true it would pass as true, which is not a valid mapping
 //I switched my if statements so that now all mappings need to be valid before it can be true
         for (const perm of permutations) {

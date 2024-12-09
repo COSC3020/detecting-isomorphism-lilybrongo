@@ -1,4 +1,5 @@
 // // test.
+const { assert } = require('console');
 const fs = require('fs');
 
 eval(fs.readFileSync('code.js')+'');
@@ -66,7 +67,8 @@ const testCases = [
             [1, 0, 0],
             [1, 0, 0],
         ],
-        expected: false, // Not isomorphic
+        expected: false,
+         // Not isomorphic
     },
 ];
 
@@ -75,12 +77,7 @@ const testCases = [
 for(let index = 0; index < testCases.length; index++){
     const { graph1, graph2, expected } = testCases[index];
     const result = are_isomorphic(graph1, graph2);
-
-    if (result !== expected) {
-        console.log(`Test Case ${index + 1}: Failed`);
-        console.log("Tests failed");
-        break;
-    } else {
-        console.log(`Test case ${index + 1}: Passed`);
-    }
+    //here is the modifed test I was missing
+    console.log(`Expected: ${expected}, Actual: ${result}`);
+    assert(result, expected);
 }
