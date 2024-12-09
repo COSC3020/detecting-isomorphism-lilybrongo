@@ -79,5 +79,5 @@ for(let index = 0; index < testCases.length; index++){
     const result = are_isomorphic(graph1, graph2);
     //here is the modifed test I was missing
     console.log(`Expected: ${expected}, Actual: ${result}`);
-    assert(result, expected);
+    assert(result === expected);
 }
