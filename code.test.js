@@ -1,4 +1,4 @@
-// test.
+// // test.
 const fs = require('fs');
 
 eval(fs.readFileSync('code.js')+'');
@@ -78,10 +78,9 @@ for(let index = 0; index < testCases.length; index++){
 
     if (result !== expected) {
         console.log(`Test Case ${index + 1}: Failed`);
-        console.log("tests failed");
+        console.log("Tests failed");
         break;
     } else {
-        console.log(`test case ${index + 1}: passed`);
+        console.log(`Test case ${index + 1}: Passed`);
     }
 }
-

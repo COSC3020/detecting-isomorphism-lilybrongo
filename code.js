@@ -8,12 +8,14 @@ function are_isomorphic(graph1, graph2) {
     //cases permit isomorphism
     if (graph1.length !== graph2.length) {
         console.log('Graphs do not have the same number of vertices');
-        return false;
+        return checkIsomorphicMapping(graph1, graph2);
+        //return false;
     }
 
     if (checknumberofEdges(graph1) !== checknumberofEdges(graph2)) {
         console.log('Graphs do not have the same number of edges');
-        return false;
+        return checkIsomorphicMapping(graph1, graph2);
+        //return false;
     }
 //using reduce to add up all the numbers within the row
 //in oder to calculate the nuber of edges in a graph respresented by the adjacency matrix    
@@ -42,7 +44,7 @@ function are_isomorphic(graph1, graph2) {
             //this removes the current item and creates a smaller list for the rest of the permutations
             const remaining = array.slice(0, i).concat(array.slice(i + 1));
             const permutations = generatePermutations(remaining);
-            console.log('generated permutations', permutations);
+            //console.log('generated permutations', permutations);
             //add the current item to the front of each smaller perm., creating a new permutation
             //with the current item into the first position
             for (const permutation of permutations) {
@@ -65,14 +67,16 @@ function are_isomorphic(graph1, graph2) {
             numbers.push(i);
         }
         const permutations = generatePermutations(numbers); // Generate all possible vertex mappings
-
+        
+//This was my error, in this for loop I had it so that if one mapping was true it would pass as true, which is not a valid mapping
+//I switched my if statements so that now all mappings need to be valid before it can be true
         for (const perm of permutations) {
-            if (checkMapping(graph1, graph2, perm)) {
-                return true; // Found a valid mapping
+            if (!checkMapping(graph1, graph2, perm)) {
+                console.log("Invalid mapping found.");
+                return false; // Invalid mapping found
             }
         }
-        console.log("No valid mapping found.");
-        return false; // No valid mapping found
+        return true; // the only way a true mapping can be acheived is if all cases are true
     }
 
     // Step 4: Check if a given vertex mapping preserves the edges
@@ -84,6 +88,7 @@ function are_isomorphic(graph1, graph2) {
             for (let j = 0; j < n; j++) {
                 const graph1Value = graph1[i][j];
                 const graph2Value = graph2[mapping[i]][mapping[j]];
+
                 if (graph1Value !== graph2Value) {
                     console.log(`Mismatch: graph1[${i}][${j}] = ${graph1Value} !== graph2[${mapping[i]}][${mapping[j]}] = ${graph2Value}`);
                     return false; // Edge mapping doesn't hold
@@ -96,6 +101,3 @@ function are_isomorphic(graph1, graph2) {
     // Final check: Isomorphic mapping exists or not
     return checkIsomorphicMapping(graph1, graph2);
 }
-
-
-
